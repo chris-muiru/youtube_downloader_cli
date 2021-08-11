@@ -55,5 +55,8 @@ if __name__=='__main__':
         THIS_DIR=os.listdir(CWD)
         for i in THIS_DIR:
             if i.endswith('.mp4'):
-                shutil.move(os.path.abspath(i),PATH)
+                if i not in PATH:
+                    shutil.move(os.path.abspath(i),PATH)
+                else:
+                    pass
         break

@@ -54,6 +54,6 @@ if __name__=='__main__':
         CWD=os.getcwd()
         THIS_DIR=os.listdir(CWD)
         for i in THIS_DIR:
-            if i.endswith('.mp3'):
+            if i.endswith('.mp4'):
                 shutil.move(os.path.abspath(i),PATH)
         break

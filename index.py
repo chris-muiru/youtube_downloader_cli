@@ -5,7 +5,7 @@
 # author:  kris muiru
 
 from pytube import YouTube,Playlist,Channel
-import os,shutil
+import os,shutil,send2trash
 
 if __name__=='__main__':
     if os.path.exists('Songs'):
@@ -55,8 +55,8 @@ if __name__=='__main__':
         THIS_DIR=os.listdir(CWD)
         for i in THIS_DIR:
             if i.endswith('.mp4'):
-                if i not in PATH:
+                if i not in os.listdir(PATH):
                     shutil.move(os.path.abspath(i),PATH)
                 else:
-                    pass
+                    send2trash.send2trash(i)
         break

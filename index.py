@@ -29,27 +29,42 @@ if __name__=='__main__':
         if link_type=='a':
             NUM_VIDEOS=input('How many audio/videos do you want to download in this playlist?')
             NUM_VIDEOS=int(NUM_VIDEOS)
-            playlist=Playlist(str(user))
-            for audio in playlist.video_urls[:NUM_VIDEOS]:
-                link=YouTube(audio)
-                print('Downloading {}'.format(link.title))
-                stream=link.streams.filter(only_audio=AUD_VID)
-                stream.first().download()
+            playlist=Playlist(str(user)) 
+            for video in playlist.video_urls[:NUM_VIDEOS]:
+                link=YouTube(video)
+                print(link.streams)
+                print('Downloading {}'.format(link.title)) 
+                if AUD_VID==False:
+                     stream=link.streams.filter(res="720p")
+                     stream.first().download() 
+                if AUD_VID==True:
+                    stream=link.streams.filter(only_audio=AUD_VID)
+                    stream.first().download()
+
         elif link_type=='b':
             NUM_VIDEOS=input('How many channel videos or audio do you want to download in this playlist?')
             NUM_VIDEOS=int(NUM_VIDEOS)
             channel=Channel(user)
             for video in playlist.video_urls[:NUM_VIDEOS]:
-                link=YouTube(audio)
-                print('Downloading {}'.format(link.title))
-                stream=link.streams.filter(file_extension='mp4',only_audio=AUD_VID)
-                stream.first().download()
+                link=YouTube(video)
+                print('Downloading {}'.format(link.title)) 
+                if AUD_VID==False:
+                     stream=link.streams.filter(res="720p",type="video")
+                     stream.first().download() 
+                if AUD_VID==True:
+                    stream=link.streams.filter(only_audio=AUD_VID)
+                    stream.first().download()
         
         elif link_type=='c':
             yt_link=YouTube(user)
             print('Downloading {}'.format(yt_link.title))
-            stream=yt_link.streams.filter(only_audio=AUD_VID)
-            stream.first().download() 
+            print(yt_link.streams)
+            if AUD_VID==False:
+                 stream=yt_link.streams.filter(res="720p")
+                 stream.first().download() 
+            if AUD_VID==True:
+                 stream=yt_link.streams.filter(only_audio=AUD_VID)
+                 stream.first().download() 
         
         CWD=os.getcwd()
         THIS_DIR=os.listdir(CWD)
